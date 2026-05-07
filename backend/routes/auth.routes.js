@@ -1,318 +1,41 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const authController = require('../controllers/auth.controller');
 const { protect } = require('../middleware/auth.middleware');
-
-// Generate JWT Token
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET || 'tabib-al-ajaeib-secret-key-2024', {
-    expiresIn: process.env.JWT_EXPIRE || '30d'
-  });
-};
 
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
-router.post('/register', async (req, res) => {
-  try {
-    const { 
-      name, 
-      email, 
-      password, 
-      phone, 
-      dateOfBirth, 
-      gender,
-      height,
-      weight,
-      bloodType
-    } = req.body;
-
-    // Validate required fields
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: 'الاسم والبريد الإلكتروني وكلمة المرور مطلوبة'
-      });
-    }
-
-    // Check if user exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({
-        success: false,
-        message: 'هذا البريد الإلكتروني مسجل بالفعل'
-      });
-    }
-
-    // Create user
-    const user = await User.create({
-      name,
-      email,
-      password,
-      phone,
-      dateOfBirth,
-      gender,
-      height,
-      weight,
-      bloodType
-    });
-
-    // Generate token
-    const token = generateToken(user._id);
-
-    res.status(201).json({
-      success: true,
-      message: 'تم إنشاء الحساب بنجاح',
-      data: {
-        user: user.getPublicProfile(),
-        token
-      }
-    });
-  } catch (error) {
-    console.error('Register error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'حدث خطأ أثناء إنشاء الحساب',
-      error: error.message
-    });
-  }
-});
+router.post('/register', authController.register);
 
 // @route   POST /api/auth/login
 // @desc    Login user
 // @access  Public
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // Validate
-    if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: 'البريد الإلكتروني وكلمة المرور مطلوبة'
-      });
-    }
-
-    // Find user and include password
-    const user = await User.findOne({ email }).select('+password');
-
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة'
-      });
-    }
-
-    // Check if user is active
-    if (!user.isActive) {
-      return res.status(401).json({
-        success: false,
-        message: 'الحساب غير مفعل'
-      });
-    }
-
-    // Check password
-    const isMatch = await user.comparePassword(password);
-
-    if (!isMatch) {
-      return res.status(401).json({
-        success: false,
-        message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة'
-      });
-    }
-
-    // Update last login
-    user.lastLogin = new Date();
-    user.loginCount += 1;
-    await user.save();
-
-    // Generate token
-    const token = generateToken(user._id);
-
-    res.json({
-      success: true,
-      message: 'تم تسجيل الدخول بنجاح',
-      data: {
-        user: user.getPublicProfile(),
-        token
-      }
-    });
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'حدث خطأ أثناء تسجيل الدخول',
-      error: error.message
-    });
-  }
-});
+router.post('/login', authController.login);
 
 // @route   POST /api/auth/social-login
 // @desc    Social login (Google, Facebook, GitHub)
 // @access  Public
-router.post('/social-login', async (req, res) => {
-  try {
-    const { provider, accessToken, profile } = req.body;
-
-    if (!provider || !profile || !profile.email) {
-      return res.status(400).json({
-        success: false,
-        message: 'بيانات التسجيل غير كاملة'
-      });
-    }
-
-    // Find existing user
-    let user = await User.findOne({ 
-      [`socialAuth.${provider}.email`]: profile.email 
-    });
-
-    if (user) {
-      // Update last login
-      user.lastLogin = new Date();
-      user.loginCount += 1;
-      await user.save();
-
-      const token = generateToken(user._id);
-
-      return res.json({
-        success: true,
-        message: 'تم تسجيل الدخول بنجاح',
-        data: {
-          user: user.getPublicProfile(),
-          token
-        }
-      });
-    }
-
-    // Create new user
-    user = await User.create({
-      name: profile.name || profile.displayName,
-      email: profile.email,
-      isVerified: true,
-      socialAuth: {
-        [provider]: {
-          id: profile.id,
-          email: profile.email,
-          verified: true
-        }
-      }
-    });
-
-    const token = generateToken(user._id);
-
-    res.status(201).json({
-      success: true,
-      message: 'تم إنشاء الحساب وتسجيل الدخول بنجاح',
-      data: {
-        user: user.getPublicProfile(),
-        token
-      }
-    });
-  } catch (error) {
-    console.error('Social login error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'حدث خطأ أثناء تسجيل الدخول الاجتماعي',
-      error: error.message
-    });
-  }
-});
+router.post('/social-login', authController.socialLogin);
 
 // @route   GET /api/auth/me
 // @desc    Get current logged in user
 // @access  Private
-router.get('/me', protect, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-
-    res.json({
-      success: true,
-      data: {
-        user: user.getPublicProfile()
-      }
-    });
-  } catch (error) {
-    console.error('Get me error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'حدث خطأ أثناء جلب البيانات',
-      error: error.message
-    });
-  }
-});
+router.get('/me', protect, authController.getMe);
 
 // @route   PUT /api/auth/update-profile
 // @desc    Update user profile
 // @access  Private
-router.put('/update-profile', protect, async (req, res) => {
-  try {
-    const allowedFields = ['name', 'phone', 'dateOfBirth', 'gender', 'height', 'weight', 'bloodType', 'medicalHistory', 'allergies', 'currentMedications', 'chronicDiseases', 'emergencyContact', 'preferences'];
-    
-    const updateData = {};
-    Object.keys(req.body).forEach(key => {
-      if (allowedFields.includes(key)) {
-        updateData[key] = req.body[key];
-      }
-    });
-
-    const user = await User.findByIdAndUpdate(
-      req.user.id,
-      updateData,
-      { new: true, runValidators: true }
-    );
-
-    res.json({
-      success: true,
-      message: 'تم تحديث الملف الشخصي بنجاح',
-      data: {
-        user: user.getPublicProfile()
-      }
-    });
-  } catch (error) {
-    console.error('Update profile error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'حدث خطأ أثناء تحديث الملف الشخصي',
-      error: error.message
-    });
-  }
-});
+router.put('/update-profile', protect, authController.updateProfile);
 
 // @route   POST /api/auth/forgot-password
 // @desc    Forgot password
 // @access  Public
-router.post('/forgot-password', async (req, res) => {
-  try {
-    const { email } = req.body;
+router.post('/forgot-password', authController.forgotPassword);
 
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: 'لا يوجد حساب بهذا البريد الإلكتروني'
-      });
-    }
-
-    // Generate reset token (implement email sending later)
-    const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    // TODO: Send email with reset token
-
-    res.json({
-      success: true,
-      message: 'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
-      data: { resetToken } // Remove in production
-    });
-  } catch (error) {
-    console.error('Forgot password error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'حدث خطأ',
-      error: error.message
-    });
-  }
-});
+// @route   POST /api/auth/reset-password
+// @desc    Reset password
+// @access  Public
+router.post('/reset-password', authController.resetPassword);
 
 module.exports = router;
