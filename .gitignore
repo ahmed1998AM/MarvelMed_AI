@@ -2,40 +2,53 @@
 # Dependencies
 node_modules/
 
+# Build outputs
+dist/
+build/
+target/
+
 # Environment variables
 .env
 .env.local
 .env.*
 
-# Build outputs
-dist/
-build/
-coverage/
-htmlcov/
-
-# Logs
-*.log
-
-# Temporary files
-*.tmp
-*.swp
-*.swo
-
-# IDE specific
+# IDE files
 .vscode/
 .idea/
+*.swp
+*.swo
+*.tmp
 
-# Python cache
+# Python specific
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Testing
-.mypy_cache/
-.pytest_cache/
-
-# OS generated files
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
 .DS_Store
 Thumbs.db
+
+# Android specific
+*.apk
+*.ap_
+build/
+.externalNativeBuild
+local.properties
+.settings/
+.gradle/
+captures/
+export/
 ```

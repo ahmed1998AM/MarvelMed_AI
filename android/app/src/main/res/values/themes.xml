@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme -->
+    <style name="Theme.TabibAlAjaeb" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+
+    <!-- Splash screen theme -->
+    <style name="Theme.TabibAlAjaeb.Splash" parent="Theme.TabibAlAjaeb">
+        <item name="android:windowBackground">@color/primary</item>
+    </style>
+</resources>

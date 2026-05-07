@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Backup rules for Android 12+ -->
+    <full-backup-content>
+        <include domain="sharedpref" path="."/>
+        <exclude domain="sharedpref" path="device.xml"/>
+    </full-backup-content>
+
+    <!-- Data extraction rules for Android 12+ -->
+    <data-extraction-rules>
+        <cloud-backup>
+            <include domain="sharedpref" path="."/>
+            <exclude domain="sharedpref" path="device.xml"/>
+        </cloud-backup>
+    </data-extraction-rules>
+</resources>

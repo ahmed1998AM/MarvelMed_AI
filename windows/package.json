@@ -1,0 +1,34 @@
+{
+  "name": "tabib-al-ajaeib-desktop",
+  "version": "1.0.0",
+  "description": "طبيب العجائب - تطبيق سطح المكتب",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "author": "احمد مصطفي ابراهيم",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.tabib.alajaeib",
+    "productName": "طبيب العجائب",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "**/*",
+      "!release/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    }
+  }
+}
