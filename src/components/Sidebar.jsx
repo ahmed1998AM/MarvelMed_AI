@@ -4,7 +4,7 @@ import { useUIStore } from '../store';
 import { 
   FiHome, FiMessageCircle, FiUser, FiCreditCard, 
   FiSettings, FiActivity, FiFileText, FiHelpCircle,
-  FiBarChart2, FiUsers, FiShield
+  FiBarChart2, FiUsers, FiShield, FiPill, FiBookOpen, FiClipboard
 } from 'react-icons/fi';
 
 export default function Sidebar() {
@@ -15,6 +15,9 @@ export default function Sidebar() {
   const menuItems = [
     { icon: FiHome, label: 'الرئيسية', path: '/dashboard' },
     { icon: FiMessageCircle, label: 'استشارة طبية', path: '/chat' },
+    { icon: FiPill, label: 'التعرف على الأدوية', path: '/medicine' },
+    { icon: FiBookOpen, label: 'التحاليل الطبية', path: '/dashboard' },
+    { icon: FiClipboard, label: 'التقارير الطبية', path: '/dashboard' },
     { icon: FiActivity, label: 'السجل الطبي', path: '/profile' },
     { icon: FiFileText, label: 'التحاليل والأشعة', path: '/dashboard' },
     { icon: FiCreditCard, label: 'الاشتراكات', path: '/subscription' },

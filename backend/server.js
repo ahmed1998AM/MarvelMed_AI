@@ -17,6 +17,7 @@ const fileRoutes = require('./routes/file.routes');
 const subscriptionRoutes = require('./routes/subscription.routes');
 const adminRoutes = require('./routes/admin.routes');
 const paymentRoutes = require('./routes/payment.routes');
+const medicineRoutes = require('./routes/medicine.routes');
 
 dotenv.config();
 
@@ -83,6 +84,7 @@ app.use('/api/files', fileRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/medicine', medicineRoutes);
 
 // Health Check Endpoint
 app.get('/api/health', (req, res) => {
