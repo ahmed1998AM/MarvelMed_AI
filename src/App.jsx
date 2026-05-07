@@ -14,6 +14,10 @@ import SubscriptionPage from './pages/SubscriptionPage';
 import MedicinePage from './pages/MedicinePage';
 import AdminDashboard from './pages/AdminDashboard';
 import ActivityLogPage from './pages/ActivityLogPage';
+import LabAnalysisPage from './pages/LabAnalysisPage';
+import RadiologyPage from './pages/RadiologyPage';
+import ReportsPage from './pages/ReportsPage';
+import ThemesPage from './pages/ThemesPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Components
@@ -74,6 +78,10 @@ function App() {
               <Route path="/subscription" element={isAuthenticated ? <SubscriptionPage /> : <Navigate to="/login" />} />
               <Route path="/medicine" element={isAuthenticated ? <MedicinePage /> : <Navigate to="/login" />} />
               <Route path="/activity-log" element={isAuthenticated ? <ActivityLogPage /> : <Navigate to="/login" />} />
+              <Route path="/lab-analysis" element={isAuthenticated ? <LabAnalysisPage /> : <Navigate to="/login" />} />
+              <Route path="/radiology" element={isAuthenticated ? <RadiologyPage /> : <Navigate to="/login" />} />
+              <Route path="/reports" element={isAuthenticated ? <ReportsPage /> : <Navigate to="/login" />} />
+              <Route path="/themes" element={isAuthenticated ? <ThemesPage /> : <Navigate to="/login" />} />
               <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
               
               {/* 404 */}

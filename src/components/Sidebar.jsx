@@ -4,7 +4,7 @@ import { useUIStore } from '../store';
 import { 
   FiHome, FiMessageCircle, FiUser, FiCreditCard, 
   FiSettings, FiActivity, FiFileText, FiHelpCircle,
-  FiBarChart2, FiUsers, FiShield, FiPill, FiBookOpen, FiClipboard
+  FiBarChart2, FiUsers, FiShield, FiPill, FiBookOpen, FiClipboard, FiImage, FiPalette
 } from 'react-icons/fi';
 
 export default function Sidebar() {
@@ -16,10 +16,11 @@ export default function Sidebar() {
     { icon: FiHome, label: 'الرئيسية', path: '/dashboard' },
     { icon: FiMessageCircle, label: 'استشارة طبية', path: '/chat' },
     { icon: FiPill, label: 'التعرف على الأدوية', path: '/medicine' },
-    { icon: FiBookOpen, label: 'التحاليل الطبية', path: '/dashboard' },
-    { icon: FiClipboard, label: 'التقارير الطبية', path: '/dashboard' },
+    { icon: FiBookOpen, label: 'التحاليل الطبية', path: '/lab-analysis' },
+    { icon: FiImage, label: 'الأشعة الطبية', path: '/radiology' },
+    { icon: FiClipboard, label: 'التقارير الطبية', path: '/reports' },
     { icon: FiActivity, label: 'سجل العمليات', path: '/activity-log' },
-    { icon: FiFileText, label: 'التحاليل والأشعة', path: '/dashboard' },
+    { icon: FiPalette, label: 'الثيمات', path: '/themes' },
     { icon: FiCreditCard, label: 'الاشتراكات', path: '/subscription' },
     { icon: FiUsers, label: 'المدير', path: '/admin', adminOnly: true },
   ];

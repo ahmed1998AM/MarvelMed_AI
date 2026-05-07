@@ -1,26 +1,17 @@
 ```
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
+# Dependencies
+node_modules/
+
+# Build artifacts
 dist/
 build/
-target/
-
-# Dependencies
-.venv/
-venv/
-node_modules/
-.mypy_cache/
-.pytest_cache/
-.gradle/
+*.js.map
+*.jsx.map
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-*.swo
 
 # Environment
 .env
@@ -30,17 +21,34 @@ node_modules/
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# System
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Coverage
+# Python artifacts (if any Python files exist in project)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Coverage reports
 coverage/
 htmlcov/
 .coverage
+
+# Testing
+.nyc_output/
+coverage-final.json
+
+# Compiled Binary Files
+*.exe
+*.dll
+*.so
+*.a
+*.obj
+*.out
+*.class
 
 # Compressed files
 *.zip
