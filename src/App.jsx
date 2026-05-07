@@ -13,6 +13,7 @@ import ProfilePage from './pages/ProfilePage';
 import SubscriptionPage from './pages/SubscriptionPage';
 import MedicinePage from './pages/MedicinePage';
 import AdminDashboard from './pages/AdminDashboard';
+import ActivityLogPage from './pages/ActivityLogPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Components
@@ -72,6 +73,7 @@ function App() {
               <Route path="/profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
               <Route path="/subscription" element={isAuthenticated ? <SubscriptionPage /> : <Navigate to="/login" />} />
               <Route path="/medicine" element={isAuthenticated ? <MedicinePage /> : <Navigate to="/login" />} />
+              <Route path="/activity-log" element={isAuthenticated ? <ActivityLogPage /> : <Navigate to="/login" />} />
               <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
               
               {/* 404 */}

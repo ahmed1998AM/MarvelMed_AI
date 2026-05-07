@@ -18,7 +18,7 @@ export default function Sidebar() {
     { icon: FiPill, label: 'التعرف على الأدوية', path: '/medicine' },
     { icon: FiBookOpen, label: 'التحاليل الطبية', path: '/dashboard' },
     { icon: FiClipboard, label: 'التقارير الطبية', path: '/dashboard' },
-    { icon: FiActivity, label: 'السجل الطبي', path: '/profile' },
+    { icon: FiActivity, label: 'سجل العمليات', path: '/activity-log' },
     { icon: FiFileText, label: 'التحاليل والأشعة', path: '/dashboard' },
     { icon: FiCreditCard, label: 'الاشتراكات', path: '/subscription' },
     { icon: FiUsers, label: 'المدير', path: '/admin', adminOnly: true },
