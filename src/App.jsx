@@ -11,6 +11,7 @@ import DashboardPage from './pages/DashboardPage';
 import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
 import SubscriptionPage from './pages/SubscriptionPage';
+import MedicinePage from './pages/MedicinePage';
 import AdminDashboard from './pages/AdminDashboard';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -70,6 +71,7 @@ function App() {
               <Route path="/chat/:agentId" element={isAuthenticated ? <ChatPage /> : <Navigate to="/login" />} />
               <Route path="/profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
               <Route path="/subscription" element={isAuthenticated ? <SubscriptionPage /> : <Navigate to="/login" />} />
+              <Route path="/medicine" element={isAuthenticated ? <MedicinePage /> : <Navigate to="/login" />} />
               <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
               
               {/* 404 */}
