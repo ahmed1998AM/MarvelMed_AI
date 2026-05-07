@@ -1,13 +1,4 @@
-```
-# Dependencies
-node_modules/
-
-# Build artifacts
-dist/
-build/
-*.js.map
-*.jsx.map
-
+```gitignore
 # Logs and temp files
 *.log
 *.tmp
@@ -16,39 +7,43 @@ build/
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 
 # Editors
 .vscode/
 .idea/
 
-# OS generated files
+# Dependencies
+.venv/
+venv/
+node_modules/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+dist/
+build/
+target/
+.gradle/
+
+# System files
 .DS_Store
 Thumbs.db
 
-# Python artifacts (if any Python files exist in project)
-__pycache__/
+# Compiled files
 *.pyc
-*.pyo
-*.pyd
-
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Testing
-.nyc_output/
-coverage-final.json
-
-# Compiled Binary Files
+*.class
+*.o
 *.exe
 *.dll
 *.so
 *.a
 *.obj
 *.out
-*.class
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
 
 # Compressed files
 *.zip
