@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">طبيب العجائب</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="register">إنشاء حساب</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="no_account">ليس لديك حساب؟</string>
+    <string name="have_account">لديك حساب بالفعل؟</string>
+    <string name="welcome">مرحباً بك في طبيب العجائب</string>
+    <string name="choose_agent">اختر الوكيل الطبي</string>
+    <string name="general_doctor">طبيب عام</string>
+    <string name="radiology">أشعة وتشخيص</string>
+    <string name="lab_analysis">تحاليل طبية</string>
+    <string name="cardiology">قلب وأوعية</string>
+    <string name="neurology">مخ وأعصاب</string>
+    <string name="dermatology">جلدية</string>
+    <string name="pediatrics">أطفال</string>
+    <string name="consultant">استشاري</string>
+    <string name="start_chat">ابدأ المحادثة</string>
+    <string name="upload_file">رفع ملف طبي</string>
+    <string name="voice_call">مكالمة صوتية</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="profile">الملف الطبي</string>
+    <string name="subscription">الاشتراكات</string>
+    <string name="settings">الإعدادات</string>
+    <string name="help">المساعدة</string>
+    <string name="about">عن التطبيق</string>
+    <string name="developer_info">تطوير: احمد مصطفي ابراهيم</string>
+    <string name="contact">للتواصل: 01225155329</string>
+</resources>
